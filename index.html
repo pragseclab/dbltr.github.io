@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>RoleModels: Role-based Debloating for Web Applications</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link href="vendor/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/highlightjs/styles/default.css">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="./" data-toggle="tooltip" data-placement="bottom" title="DBLTR"><i>DBLTR</i></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#introduction">Introduction
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#repo">Source Code Repository</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#playbook"><i>DBLTR</i> Playbook</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5 logo" data-toggle="tooltip" data-placement="top" title="dbltr">RoleModels</h1>
+        <p class="lead">Role-based Debloating for Web Applications</p>
+      </div>
+    </div>
+
+    <!-- Introduction -->
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <hr />
+      </div>
+      <div class="col-lg-12">
+        <a class="anchor" name="introduction"></a>
+        <h4 class="mt-1"><i class="fas fa-info"></i> Introduction</h1>
+          <p>Previous debloating schemes produce one debloated copy of the target application that includes features
+            required by all users. In this work, we built a pipeline to identify clusters of users that interact with
+            similar set of features, and assigned them to dynamically generated roles. Next, we produced debloated
+            applications tailored to these roles. As a result, we produce smaller web applications compared to prior
+            work that are exposed to fewer CVEs. Our tool named <i>dbltr</i> comes with the clustering algorithm to
+            generate roles. It also incorporates a transparent reverse-proxy to identify successful logins and redirect
+            users to their underlying debloated web applications.</p>
+          <p><i class="fas fa-file-pdf"></i> The paper is available at <a
+              href="https://www.securitee.org/files/debloating_usec2019.pdf">https://www.securitee.org/files/dbltr_2022codaspy.pdf</a>
+          </p>
+          <!-- Temporarily hiding Slides and Videos, to be included later -->
+          <!-- <p>
+          <h6 class="mt-1"><i class="fas fa-file-powerpoint"></i> Slides</h6>
+              <ul>
+                  <li>
+                      <a href="https://www.usenix.org/sites/default/files/conference/protected-files/sec19_slides_azad.pdf">Usenix Security 2019</a>
+                  </li>
+                  <li>
+                      <a href="./OWASP_DC_Debloating_Public.pdf">OWASP Appsec DC 2019</a>
+                  </li>
+              </ul>
+      </p> -->
+          <p>
+          <h6 class="mt-1"><i class="fas fa-video"></i> Videos</h6>
+          <div style="padding:56.25% 0 0 0;position:relative;"><iframe
+              src="https://player.vimeo.com/video/652161913?h=bc5fdd1eea&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" title="DBLTR Demo"></iframe></div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+          <!-- <ul>
+                <li>
+                    <a href="https://www.youtube.com/watch?v=EbKpD0bj89A">Usenix Security 2019 Talk</a>
+                </li>
+                <li>
+                  <a href="https://primetime.bluejeans.com/a2m/events/playback/3de88bdb-3c08-46d3-a6b0-7ce54e475662">Georgia Tech Cyber Security Series</a>
+                </li>
+            </ul> -->
+          </p>
+      </div>
+    </div>
+
+    <!-- Repository -->
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <hr />
+      </div>
+      <div class="col-lg-12">
+        <a class="anchor" name="repo"></a>
+        <h4 class="mt-1"><i class="fas fa-layer-group"></i> Source Code Repository</h1>
+          <p>
+            The main modules in the repository are as follows:<br />
+          <ul>
+            <li>
+              <b>"LIM"</b> includes CLI tools to debloat web applications based on dynamic code-coverage. It also
+              extracts source code features (e.g., class names, function names, etc.) used in the clustering algorithm.
+              The CLI tools are invoked by the Jupyter notebook during debloating.
+            </li>
+            <li>
+              <b>"analysis"</b> includes the Jupyter notebook docker file used for clustering, debloating, and analysis
+              of attack-surface reduction after debloating.
+            </li>
+            <li>
+              <b>"docker"</b> includes the configuration files for the docker images. "docker/reverse-proxy/lua"
+              contains the configuration files to extract successful logins and session cookies.
+            </li>
+            <li>
+              <b>"dockerfiles"</b> includes the content delivery environment. "bootstrap" container populates the Redis
+              datastore with the mappings of users to roles produced by the clustering algorithm. "db" hosts the
+              database of web applications. "redis" includes the mapping of authentication cookies to users, and mapping
+              of users to roles. "web" containers host the debloated copies of web applications.
+            </li>
+            <li>
+              <b>"docker-compose.yml"</b> is the main docker file that runs the web applications, and the machinery to
+              route users to their respective debloated copies based on their roles. "rever-proxy" container uses Lua
+              configuration files to identify logins and populate the Redis datastore.
+            </li>
+            <li>
+              <b>"webapps"</b> directory includes the original and debloated copies of web applications.
+            </li>
+          </ul>
+          </p>
+          <p>
+          <h5><i class="fas fa-code-branch"></i> Adding New Web Applications</h5>
+          To onboard new web applications, we first need a training phase where we collect the usage traces from users
+          (e.g., line-level code-coverage). Next, we use the analysis docker environment to train our classifier and
+          generate the roles and debloated web applications. We then have to configure the Lua scripts to identify login
+          attempts on the new web application and extract the session cookie values. Finally, we use the generated
+          docker-compose file by the "analysis" docker environment to host our web applications.
+          </p>
+      </div>
+    </div>
+
+    <!-- Source Code -->
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <hr />
+      </div>
+      <div class="col-lg-12">
+        <a class="anchor" name="playbook"></a>
+        <h4 class="mt-1"><i class="fas fa-code"></i> <i>DBLTR</i> Playbook</h1>
+          <p>
+            In this playbook, we go over the steps for debloating and serving a web application using DBLTR. At a high
+            level, first we use the <a href="https://lessismore.debloating.com/">Less is More</a> platform to generate a
+            baseline usage profile of the web application users in the form of line coverage logs. Next, we import the
+            code coverage data into the DBLTR Jupyter notebook and incorporate classifier to group users with similar
+            behavior together under the same role (i.e., cluster). Finally, we deploy the docker compose environment
+            with the produced configurations generated by DBLTR to serve the debloated web applications to the users.
+          </p>
+          <h5>LIM Setup</h5>
+          <p>
+            Less is More can be setup using the following guide: https://lessismore.debloating.com/. More details and
+            playbook available at: https://playground.debloating.com/ After this step is done, we export the code
+            coverage of each user into the CSV format. sql_to_csv.py script can help automate this process.
+
+            For this demonstration, Less is More is hosted under LIM/training directory for debloating phpMyAdmin. In
+            this setup, we have 5 users (Alice, Bob, Charlie, David, and Eli), they perform minimal actions on
+            phpMyAdmin (kept minimal for demonstration purposes). Alice, creates a database and inserts some rows of
+            data, Bob does the same but also views the list of users, Charlie views the existing databases without
+            making any changes, David, views databases and runs manual queries and finally Eli who only views various
+            phpMyAdmin parameters.
+
+            After exporting the code coverage data from LIM, we use the provided python script (sql_to_csv.py) on a
+            system with mysql-server installed to convert the database backup to csv files for DBLTR.
+          <ul>
+            <li>files.csv: includes the "filename" of covered files in the csv file.</li>
+            <li>lines.csv: is in "filename, line_number" format.</li>
+          </ul>
+          The output CSV files generated by LIM is available under LIM/training/users/.
+          </p>
+          <h5>Generating Roles and Debloating Web Applications</h5>
+          <p>
+            Now we switch our focus to the jupter notebook "rbd_dataanalysis". This notebook is hosted under analysis
+            directory and can be setup using the provided docker-compose environment through: docker compose up -d and
+            then navigating to http://localhost:8888/lab/tree/work/rbd_dataanalysis.ipynb. The token to access this
+            notebook is set in the docker-compose env variable and is currently set to "jupytersecrettokenabhsyd68ay".
+            We can follow the cells in the notebook. Certain steps can take a long time from 30 minutes to couple hours
+            to complete on large applications with many users.
+
+            We have also provided the output of lengthy steps in the form of Python pickled objects. At the end of each
+            section, the pickle files are restored. This would be an alternative to running individual cells in the
+            notebook for that section.
+          </p>
+          <h6>Jupyter notebook sections</h6>
+          <p>
+            For the sections where pickle file is available, you can jump to the end of the section and quickly restore
+            the data from the pickle file. For new web applications outside our dataset, the whole process needs to be
+            followed instead of restoring pickle files.
+          <ul>
+            <li><b>Lib Imports: </b>Prepares the packages required for the debloating and analysis of the results.</li>
+            <li><b>Import CSV Files</b> [Pickle file available]: Import the CSV files for file and line coverage
+              information of web application users.</li>
+            <li><b>Add Source Code Features</b> [Pickle file available]: Extracts features from the code coverage data
+              used to identify similar usage patterns in the clustering. This includes files, functions, classes, and
+              namespaces used by each user's code coverage.</li>
+            <li><b>Clustering</b> [Pickle file available]: We incorporate the spectral clustering algorithm in
+              combination with Jaccards similarity metric to perform the clustering.</li>
+            <li><b>Evaluate Clusters:</b> This step compares the debloating of various clusters to identify the optimal
+              number of clusters (i.e., roles) for the web applications. The slope of the lines plotting the reduction
+              of remaining functions after debloating based on the total number of roles can be used to optimize the
+              total number of roles. We want the minimal number of roles that provide the best debloating, that is also
+              referred to as the elbow method.</li>
+            <li><b>Optimal Cluster Size:</b> Includes the number of roles determined by the previous step. In our
+              example, 6, and 7 roles for phpMyAdmin and WordPress respectively.</li>
+            <li><b>Generate Artifacts</b> [Pickle file available]: The output of clustering is the roles and mapping of
+              users to roles. Based on this information, we merge the code coverage of users assigned to each role,
+              debloat the copies of web applications specific to each role and generate the docker-compose file to serve
+              these applications. Finally, we provide the user to role mapping information to our reverse-proxy to route
+              user traffic towards their specially debloated web applications.</li>
+            <li><b>Generate Docker Environment Files:</b> This step generates the docker files. This is the last step
+              required to produce debloated web applications. We can now use the provided user-to-role mappings and
+              docker-compose configuration to serve the web applications.</li>
+            <li><b>Attack Surface Reduction Analysis:</b> This step is extra and can be used to extract and analyze the
+              information about the reduced lines of code, removed CVEs, and gadget chains after debloating.</li>
+          </ul>
+          </p>
+          <h5>Serving the debloated web applications</h5>
+          <p>In order to serve the debloated web applications, we use the generated mappings.txt configuration file
+            including user to role mappings along with the docker-compose.yaml in the root of this repository to host
+            the DBLTR setup. The web applications will be served under localhost:8080. Upon logging in, each the
+            authentication cookie of each user is extracted by our OpenResty Lua modules and stored in the Redis
+            datastore. Subsequent requests from users containing the authentication cookie will instruct the
+            reverse-proxy to transparently route their requests towards their custom debloated web applications.
+            Responses from DBLTR will include an "active_proxy" HTTP header to show which backend served that request.
+          </p>
+          <p>
+            Demo of DBLTR protecting users against CVE-2019-12616:</p>
+          <div style="padding:56.25% 0 0 0;position:relative;"><iframe
+              src="https://player.vimeo.com/video/734487271?h=fb0d435275&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+              frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;" title="DBLTR_CVE_Demo.mov"></iframe></div>
+          <script src="https://player.vimeo.com/api/player.js"></script>
+      </div>
+      <h5>Adding new web applications to DBLTR</h5>
+      <p>
+        Setup the web application under a LIM-like setup to collect the code-coverage data from web application users
+        for a period of time.
+      <ol>
+        <li>Import the code-coverage data into the debloating pipeline (Jupyter notebook) to produce the debloating
+          roles.</li>
+        <li>Create the user authentication detection logic as a new OpenResty Lua module.</li>
+        <li>Use the provided configuration to host the debloated web applications.</li>
+      </ol>
+      </p>
+      <h5>OpenResty Authentication Detection Lua Module</h5>
+      <p>
+        The files for this module are located under <mark>docker/reverse-proxy/lua/</mark>. The skeleton of this code is
+        available under common.lua as well as application specific files under pma (phpMyAdmin login detection) and wp
+        (WordPress login detection). default.conf file which is an Nginx/OpenResty config file is used to activate the
+        Lua module. At a high level:
+      <ul>
+        <li><b>login_handler.lua:</b> Detects a successful login request, in the example of phpMyAdmin, this consists of
+          a POST request towards the root of the web application and should result in a 302 HTTP response code. This
+          module then extracts the authentication cookie value under "phpmyadmin" cookie. This mapping is stored in the
+          redis datastore for future use.</li>
+        <li><b>login_username_extractor.lua:</b> Extracts the provided username from the login request. In the example
+          of phpMyAdmin, we look for "/" or "index.php" POST requests containing "pma_username" POST parameter
+          containing the username.</li>
+        <li><b>redirect_to_proxy.lua:</b> Looks for the presence of authentication cookies (e.g., "phpmyadmin"), it then
+          tries to extract the username from the datastore based on the authentication cookie value. Next, we find the
+          mapping of user to role and instruct the reverse-proxy to route user traffic to their debloated web
+          application.</li>
+      </ul>
+      </p>
+    </div>
+
+    <!-- About -->
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <hr />
+      </div>
+      <div class="col-lg-12">
+        <a class="anchor" name="about"></a>
+        <h4 class="mt-1"><i class="fas fa-users"></i> About</h1>
+          <p>We are a team of security researchers at PragSec Lab, Stony Brook University (<a target="_blank"
+              href="https://securitee.org">https://securitee.org</a>).<br />For any queries or questions contact Babak
+            Amin Azad at <a href="mailto:baminazad@cs.stonybrook.edu">baminazad@cs.stonybrook.edu</a></p>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/highlightjs/highlight.pack.js"></script>
+    <script>
+      $(document).ready(function () {
+        hljs.initHighlightingOnLoad();
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+</body>
+
+</html>
