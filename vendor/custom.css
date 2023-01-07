@@ -26,3 +26,8 @@ ul.dashed > li:before {
     max-width: 960px;
   }
 }
+
+video {
+  width: 100%;
+  height: auto;
+}
